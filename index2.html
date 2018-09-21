@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CrystalCollectors</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+
+</head>
+
+<body>
+
+  <!-- The title of the page -->
+  <h1>CrystalCollectors!</h1>
+
+  <p>You will be given a random number at the start of the game. 
+    There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score. 
+    You win the game by matching your total score to random number, you lose the game if your total score goes above the random number. 
+    The value of each crystal is hidden from you until you click on it. 
+    Each time when the game starts, the game will change the values of each crystal</p>
+
+  <p> </p><span id="target_number"></span></p>
+
+  <p>Wins: <span id="wins">0</span></p>
+
+  <p>Losses: <span id="losses">0</span></p>
+
+  <div id="crystals"></div>
+
+  <p>Your total score is: <span id="total-score"></span></p>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+      
+
+  var wins = 0;
+  var losses = 0;
+  var counter = 0;
+
+  var fiveArray = [];
+
+
+
+var startgame = function(){
+
+  var targetNumber = Math.floor(Math.random()*102) + 19;
+  $("#target_number").text(targetNumber);
+
+  // Create a for loop that generates 4 random numbers and push them to var fiveArray.
+  for (var i = 0; i < 4; i++) {
+  crystal_value = Math.floor(Math.random()*12) + 1;
+  fiveArray.push(crystal_value);
+
+  }
+  console.log(fiveArray);
+
+//create 4 images and obtain value from var fiveArray.
+
+    var imageCrystal1 = $("<img>");
+    imageCrystal1.addClass("crystal-image");
+    imageCrystal1.attr("src", "assets/images/crystal_1.jpg");
+    imageCrystal1.attr("data-crystalvalue", fiveArray[0]);
+    $("#crystals").append(imageCrystal1);
+
+    var imageCrystal2 = $("<img>");
+    imageCrystal2.addClass("crystal-image");
+    imageCrystal2.attr("src", "assets/images/crystal_2.jpg");
+    imageCrystal2.attr("data-crystalvalue", fiveArray[1]);
+    $("#crystals").append(imageCrystal2);
+
+    var imageCrystal3 = $("<img>");
+    imageCrystal3.addClass("crystal-image");
+    imageCrystal3.attr("src", "assets/images/crystal_3.jpg");
+    imageCrystal3.attr("data-crystalvalue", fiveArray[2]);
+    $("#crystals").append(imageCrystal3);
+
+    var imageCrystal4 = $("<img>");
+    imageCrystal4.addClass("crystal-image");
+    imageCrystal4.attr("src", "assets/images/crystal_4.jpg");
+    imageCrystal4.attr("data-crystalvalue", fiveArray[3]);
+    $("#crystals").append(imageCrystal4);
+
+//when images are clicked.
+$(".crystal-image").on("click", function() {
+
+var crystalValue = ($(this).attr("data-crystalvalue"));
+crystalValue = parseInt(crystalValue);
+
+counter += crystalValue;
+$("#total-score").html(counter);
+
+
+if (counter === targetNumber) {
+wins++;
+$("#wins").text(wins);
+alert("You win!");
+reset();
+startgame();
+
+}
+
+else if (counter >= targetNumber) {
+losses++;
+$("#losses").text(losses);
+alert("You lose!!");
+reset();
+startgame();
+}
+
+});
+
+}
+
+startgame();
+
+
+
+var reset = function() {
+  counter = 0;
+  fiveArray = [];
+  $("#crystals").empty();
+};
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+.crystal-image {
+    width: 200px;
+    height: 200px;
+  }
+
+body {
+    background-color : lightblue;
+    width:800px;
+    
+}
+
+h1 {
+    width : 300px;
+    height: 50px;
+    background-color : green;
+    color:white;
+}
+
+p{
+    background-color : white;
+}
+
+#target_number{
+    background-color: yellow;
+    font-size: 50px;
+    width : 200;
+    height : 200;
+}
+
